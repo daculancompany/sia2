@@ -10,7 +10,6 @@ if (isset($_SESSION['USER_ID'])) {
 <input type="hidden"  name="signup" />  
     <?php
     if (isset($_GET['message'])) {
-        echo $_GET['type'];
         echo $_GET['message'];
     }
     ?>
@@ -24,7 +23,7 @@ if (isset($_SESSION['USER_ID'])) {
     </div>
     <div class="mb-3">
         <label class="form-label">Password</label>
-        <input name="password" type="password" class="form-control" placeholder="enter password" required="">>
+        <input name="password" type="password" class="form-control" placeholder="enter password" required="">
     </div>
     <button type="submit" class="btn btn-primary"> Submit </button>
 </form>

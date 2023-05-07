@@ -42,6 +42,56 @@ if (isset($_GET['type']) && $_GET['type'] === 'logout') {
 
 }
 
+if (isset($_POST['save-product'])) {
+    $product_name = $_POST['product_name'];
+    $product_price = $_POST['product_price'];
+    //$file_name = basename($_FILES['product_image']['name']);
+    $file_extension =  pathinfo($_FILES['product_image']['name'], PATHINFO_EXTENSION);
+    $filename = rand(1,9999999999999) . strtotime( date('Y-m-d H:i:s')) .  '.'.$file_extension;
+    if (move_uploaded_file($_FILES['product_image']['tmp_name'], "uploads/$filename")) {
+        $sql = "INSERT INTO `products`(`image`, `product_name`, `product_price`) VALUES ('$filename', '$product_name', '$product_price')";
+        if (!$conn->query( $sql )) {
+            echo("Error description: " . $conn->error);
+        }else{
+            echo 'success';
+        }
+       // $result = $conn->query($sql);
+    } else {
+      echo "An error occurred";
+    }
+}
+
+
+if (isset($_POST['save-product2'])) {
+    //basename($_FILES['image']['name'])
+    $product_name = $_POST['product_name'];
+    $product_price = $_POST['product_price'];
+    $file_extension =  pathinfo($_FILES['product_image']['name'], PATHINFO_EXTENSION);
+    $filename = rand(1,9999999999999) . strtotime( date('Y-m-d H:i:s')) .  '.'.$file_extension;
+    if (move_uploaded_file($_FILES['product_image']['tmp_name'], "uploads/$filename")) {
+        $sql = "INSERT INTO `products`(`image`, `product_name`, `product_price`) VALUES ('$filename', '$product_name', '$product_price')";
+        if (!$conn->query( $sql )) {
+            echo("Error description: " . $conn->error);
+        }else{
+            echo 'success';
+        }
+       // $result = $conn->query($sql);
+    } else {
+      echo "An error occurred";
+    }
+}
+
+if (isset($_POST['testApi'])) {
+    var_dump($_POST['name']);
+}
+
+if (isset($_POST['saveOrder'])) {
+    $total_amount = $_POST['total_amount'];
+    foreach($_POST['orders'] as $order){
+        var_dump($order['id']);
+        //add save code here
+    }
+}
 
 
 else{
